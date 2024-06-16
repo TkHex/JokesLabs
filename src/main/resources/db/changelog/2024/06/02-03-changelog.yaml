@@ -160,26 +160,5 @@ databaseChangeLog:
                   name: enabled
                   type: BOOLEAN
             tableName: users
-  - changeSet:
-      id: 1718568346859-9
-      author: ???? (generated)
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: joke_call_id
-            baseTableName: joke_redact
-            constraintName: FK_JOKE_REDACT_ON_JOKE_CALL
-            referencedColumnNames: joke_call_id
-            referencedTableName: joke_call
-  - changeSet:
-      id: 1718568346859-10
-      author: ???? (generated)
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: user_id
-            baseTableName: user_roles
-            constraintName: FK_USER_ROLES_ON_USER
-            referencedColumnNames: id
-            referencedTableName: users
+
 
