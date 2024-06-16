@@ -3,6 +3,7 @@ package Lab1.demo.controller;
 import Lab1.demo.model.JokeModel;
 import Lab1.demo.service.JokeModelService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/joke")
 @RequiredArgsConstructor
+@Slf4j
 public class JokeController {
 
     private final JokeModelService jokeModelService;

@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final EntityManager manager;
 
     @Override
+    @Transactional
     public void registration(String username, String password) {
         if (userRepository.findByUsername(username).isEmpty()) {
             User user = userRepository.save(

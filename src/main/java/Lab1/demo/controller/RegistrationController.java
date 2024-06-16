@@ -1,6 +1,7 @@
 package Lab1.demo.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import Lab1.demo.service.UserService;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/registration")
+@Slf4j
 public class RegistrationController {
 
     private final UserService userService;
