@@ -3,6 +3,8 @@ package Lab1.demo.controller;
 import Lab1.demo.model.JokeModel;
 import Lab1.demo.service.JokeModelService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,19 +19,17 @@ public class JokeController {
     private final JokeModelService jokeModelService;
 
     @PostMapping
-    ResponseEntity<Void> addJoke(@RequestBody JokeModel joke){
-        jokeModelService.addJoke(joke);
+    ResponseEntity<Void> addJoke(@RequestBody JokeModel jokeModel){
+        jokeModelService.addJoke(jokeModel);
         return ResponseEntity.ok().build();
 
     }
 
-
     @GetMapping
-    ResponseEntity<List<JokeModel>> getAllJoke(){
-        return ResponseEntity.ok(jokeModelService.getAllJokes());
+    ResponseEntity<Page<JokeModel>> getAllJoke(Pageable pageable){
+        return ResponseEntity.ok(jokeModelService.getAllJokes(pageable));
 
     }
-
 
     @GetMapping("/{id}")
     ResponseEntity<JokeModel> getJokeById(@PathVariable Long id){
@@ -48,4 +48,10 @@ public class JokeController {
         jokeModelService.deleteJokeById(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/top5")
+    ResponseEntity<Page<JokeModel>> getTop5Jokes(Pageable pageable) {
+        return  ResponseEntity.ok(jokeModelService.getTop5Jokes(pageable));
+    }
+
 }

@@ -1,13 +1,16 @@
 package Lab1.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.catalina.LifecycleState;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "joke")
 @Table(name = "joke_redact")
@@ -19,7 +22,8 @@ public class JokeModel {
 
     @Id
     @Column(name = "joke_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "joke_gen_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "joke_gen_seq",sequenceName = "joke_gen_seq", initialValue = 1, allocationSize = 1)
     private Long id;
 
     @Column(name = "joke")
@@ -33,4 +37,7 @@ public class JokeModel {
     @Column(name = "change_joke")
     private LocalDateTime dateChangeJoke;
 
+    @ManyToOne
+    @JoinColumn(name = "joke_call_id")
+    private JokeCall jokeCall;
 }

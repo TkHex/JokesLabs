@@ -1,11 +1,14 @@
 package Lab1.demo.service;
 
+import Lab1.demo.model.JokeCall;
 import Lab1.demo.model.JokeModel;
+import Lab1.demo.repository.JokeCallRepository;
 import Lab1.demo.repository.JokeModelRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -13,15 +16,28 @@ import java.util.Optional;
 public class JokeModelServiceImpl implements JokeModelService {
 
     private final JokeModelRepository jokeModelRepository;
+    private final JokeCallRepository jokeCallRepository;
 
     @Override
-    public void addJoke(JokeModel joke) {
-        jokeModelRepository.save(joke);
+    public void addJoke(JokeModel jokeModel) {
+
+        JokeCall jokeCall = jokeModel.getJokeCall();
+        if (jokeCall != null && jokeCall.getCallId() != null){
+            jokeCall = jokeCallRepository.findById(jokeCall.getCallId()).orElse(null);
+        }
+
+        jokeModel.setJokeCall(jokeCall);
+        jokeModelRepository.save(jokeModel);
     }
 
     @Override
-    public List<JokeModel> getAllJokes() {
-        return jokeModelRepository.findAll();
+    public Page<JokeModel> getAllJokes(Pageable pageable) {
+        return jokeModelRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<JokeModel> getTop5Jokes(Pageable pageable) {
+        return jokeModelRepository.findTop5ByOrderByJokeCallDesc(pageable);
     }
 
     @Override
@@ -43,5 +59,9 @@ public class JokeModelServiceImpl implements JokeModelService {
     @Override
     public void deleteJokeById(Long id) {
         jokeModelRepository.deleteById(id);
+    }
+
+    public JokeModel getRandomJoke() {
+        return jokeModelRepository.findRandomJoke();
     }
 }
