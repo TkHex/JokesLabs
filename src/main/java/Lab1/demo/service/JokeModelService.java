@@ -1,11 +1,9 @@
 package Lab1.demo.service;
 
-import Lab1.demo.model.JokeCall;
 import Lab1.demo.model.JokeModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface JokeModelService {

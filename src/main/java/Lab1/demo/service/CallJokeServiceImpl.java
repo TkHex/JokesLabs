@@ -2,7 +2,6 @@ package Lab1.demo.service;
 
 import Lab1.demo.model.JokeCall;
 import Lab1.demo.repository.JokeCallRepository;
-import Lab1.demo.repository.JokeModelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

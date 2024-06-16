@@ -1,9 +1,7 @@
 package Lab1.demo.controller;
 
 import Lab1.demo.model.JokeCall;
-import Lab1.demo.model.JokeModel;
 import Lab1.demo.service.CallJokeServise;
-import Lab1.demo.service.JokeModelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
